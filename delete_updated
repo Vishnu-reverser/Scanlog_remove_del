@@ -1,0 +1,15 @@
+import subprocess
+import re
+
+res = []
+with open('log.txt', 'r', encoding='utf-8') as istr:
+    with open('del.bat', 'w') as ostr:
+        for line in istr:
+            s = re.findall(r"[a-zA-Z0-9]{64}",line)
+            for i in s:
+                if i not in res:
+                    res.append(i)
+                    u = "del " + i
+                    print (u, file=ostr)
+
+subprocess.call([r'del.bat'])
